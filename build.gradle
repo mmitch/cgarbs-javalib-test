@@ -1,0 +1,74 @@
+apply plugin: 'java'
+/* we are a Java project, obviously */
+sourceCompatibility = '1.6'
+
+
+apply plugin: 'jacoco'
+/* generate Java code coverage reports */
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		html.enabled true
+	}
+}
+
+
+apply plugin: 'com.cinnober.gradle.semver-git'
+/* deduce build version number from git tags
+   source: https://github.com/cinnober/semver-git */
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath group: 'com.cinnober.gradle', name: 'semver-git', version: '2.2.1'
+	}
+}
+
+
+apply plugin: 'maven-publish'
+/* publish directly to maven repositories */
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = 'de.cgarbs'
+			artifactId = 'cgarbs-javalib-test'
+
+			from components.java
+		}
+	}
+}
+publishing {
+	repositories {
+		maven {
+			name "cgarbs.de local repo"
+			url "file:/home/mitch/pub/www/maven2"
+			/* sad panda: aparrently SFTP currently only works with passwords, not with pubkey */
+		}
+	}
+}
+
+
+repositories {
+	jcenter()
+}
+dependencies {
+	compile 'org.hamcrest:hamcrest-library:1.3'
+	testCompile 'junit:junit:4.12', 'org.hamcrest:hamcrest-library:1.3'
+}
+
+ /***
+ **** my own tasks
+ ***/
+
+task fixit(type: Exec) {
+	description 'Fixes line breaks and indentation on empty lines.'
+
+	commandLine 'tools/fixit.sh'
+}
+
+task version() {
+     description 'Show version that would be published'
+
+     println 'version=' + version
+}
