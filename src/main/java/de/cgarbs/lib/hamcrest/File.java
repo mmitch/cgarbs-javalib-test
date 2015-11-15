@@ -4,6 +4,8 @@
  */
 package de.cgarbs.lib.hamcrest;
 
+import java.io.IOException;
+
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -31,32 +33,46 @@ public abstract class File
 			@Override
 			public void describeTo(Description description)
 			{
-				description.appendText("absolute path is ").appendValue(getAbsolutePathSafe(file));
+				description.appendText("absolute path is ").appendValue(getCanonicalPathSafe(file));
 			}
 
 			@Override
 			public void describeMismatch(final Object item, Description mismatchDescription)
 			{
-				mismatchDescription.appendText(" was ").appendValue(getAbsolutePathSafe((java.io.File) item));
+				mismatchDescription.appendText(" was ").appendValue(getCanonicalPathSafe((java.io.File) item));
 			}
 
 			@Override
 			public boolean matches(Object item)
 			{
-				if (item == null)
+				try
 				{
-					return item == file;
+					if (item == null)
+					{
+						return item == file;
+					}
+					return ((java.io.File) item).getCanonicalPath().equals(getCanonicalPathSafe(file));
 				}
-				return ((java.io.File) item).getAbsolutePath().equals(getAbsolutePathSafe(file));
+				catch (IOException e)
+				{
+					return false;
+				}
 			}
 
-			private String getAbsolutePathSafe(java.io.File file)
+			private String getCanonicalPathSafe(java.io.File file)
 			{
 				if (file == null)
 				{
 					return null;
 				}
-				return file.getAbsolutePath();
+				try
+				{
+					return file.getCanonicalPath();
+				}
+				catch (IOException e)
+				{
+					return file.getAbsolutePath();
+				}
 			}
 		};
 	}
