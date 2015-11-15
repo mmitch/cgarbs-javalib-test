@@ -36,8 +36,7 @@ public abstract class Swing
 		LayoutManager layout = jPanel.getLayout();
 		if (! (layout instanceof GridBagLayout))
 		{
-//			fail("Component has no GridBagLayout, but " + layout.getClass());
-			return null;
+			return new InnerElements(jPanel,  new GridBagLayout());
 		}
 		return new InnerElements(jPanel, (GridBagLayout) layout);
 	}
