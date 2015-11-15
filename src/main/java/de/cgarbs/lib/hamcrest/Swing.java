@@ -4,8 +4,6 @@
  */
 package de.cgarbs.lib.hamcrest;
 
-import static org.junit.Assert.fail;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -38,7 +36,8 @@ public abstract class Swing
 		LayoutManager layout = jPanel.getLayout();
 		if (! (layout instanceof GridBagLayout))
 		{
-			fail("Component has no GridBagLayout, but " + layout.getClass());
+//			fail("Component has no GridBagLayout, but " + layout.getClass());
+			return null;
 		}
 		return new InnerElements(jPanel, (GridBagLayout) layout);
 	}
