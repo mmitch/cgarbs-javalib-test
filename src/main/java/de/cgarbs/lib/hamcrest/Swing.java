@@ -93,6 +93,10 @@ public abstract class Swing
 				if (actual instanceof JPanel)
 				{
 					Border border = ((JPanel) actual).getBorder();
+					if (border == null)
+					{
+						return null;
+					}
 					if (border instanceof TitledBorder)
 					{
 						return ((TitledBorder) border).getTitle();
