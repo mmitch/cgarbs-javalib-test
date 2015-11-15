@@ -17,20 +17,20 @@ import org.junit.Test;
 public class FileTest
 {
 	final static Character sep = File.separatorChar;
-	
+
 	@Test
 	public void checkSameFileAs()
 	{
 		{
 			File a = new File("some file.txt");
 			File b = new File("some file.txt");
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = new File("some file.txt");
 			File b = new File("some other file.txt");
-			
+
 			assertThat(a, is(not(sameFileAs(b))));
 		}
 	}
@@ -41,46 +41,46 @@ public class FileTest
 		{
 			File a = null;
 			File b = null;
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = null;
 			File b = new File("some file.txt");
-			
+
 			assertThat(a, is(not(sameFileAs(b))));
 		}
 		{
 			File a = new File("some other file.txt");
 			File b = null;
-			
+
 			assertThat(a, is(not(sameFileAs(b))));
 		}
 	}
-		
+
 	@Test
 	public void checkSameFileAsRelativeDirectories()
 	{
 		{
 			File a = new File("somedir"+sep+"some file.txt");
 			File b = new File("somedir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = new File("somedir"+sep+".."+sep+"somedir"+sep+"some file.txt");
 			File b = new File("somedir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = new File("somedir"+sep+"some file.txt");
 			File b = new File("some other dir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(not(sameFileAs(b))));
 		}
 	}
-	
+
 	@Test
 	public void checkSameFileAsAbsoluteDirectories()
 	{
@@ -88,31 +88,31 @@ public class FileTest
 		{
 			File a = new File(currentPath+sep+"somedir"+sep+"some file.txt");
 			File b = new File("somedir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = new File(currentPath+sep+"somedir"+sep+".."+sep+"somedir"+sep+"some file.txt");
 			File b = new File("somedir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(sameFileAs(b)));
 		}
 		{
 			File a = new File(currentPath+sep+"somedir"+sep+"some file.txt");
 			File b = new File("some other dir"+sep+"some file.txt");
-			
+
 			assertThat(a, is(not(sameFileAs(b))));
 		}
 	}
-	
+
 	@Test
 	public void checkSameFileAsDescriptions()
 	{
 		final File FILE_1 = new File("some file.txt");
 		final File FILE_2 = new File("some other file.txt");
-		
+
 		Description description;
-		
+
 		description = new StringDescription();
 		sameFileAs(FILE_1).describeTo(description);
 		assertThat(

@@ -24,7 +24,7 @@ import org.hamcrest.Matcher;
 
 /**
  * Hamcrest Matchers for various Swing classes
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.1.0
  *

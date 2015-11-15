@@ -12,7 +12,7 @@ import org.hamcrest.Matcher;
 
 /**
  * Hamcrest Matchers for {@link java.io.File} objects
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.1.0
  *
@@ -22,9 +22,9 @@ public abstract class File
 	/**
 	 * Matches two instances of {@link java.io.File} by comparing their
 	 * absolute paths.  Null values are also considered equal.
-	 *  
+	 *
 	 * @param file the {@link java.io.File} to compare to
-	 * @return a new {@link BaseMatcher} matching as described 
+	 * @return a new {@link BaseMatcher} matching as described
 	 */
 	public static Matcher<java.io.File> sameFileAs(final java.io.File file)
 	{

@@ -39,11 +39,11 @@ public class SwingTest
 	static final String LABEL_1    = "some label";
 	static final String LABEL_2    = "some other label";
 	static final String LABEL_NULL = null;
-	
+
 	static final String TITLE_1    = "some title";
 	static final String TITLE_2    = "some other title";
 	static final String TITLE_NULL = null;
-	
+
 	@Test
 	public void checkInnerElements()
 	{
@@ -53,21 +53,21 @@ public class SwingTest
 
 		Component object1 = new JPanel();
 		Component object2 = new JTextField();
-		
+
 		GridBagConstraints gbc;
-		
+
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
 		gbc.gridy = 4;
 		thePanel.add(object1, gbc);
-		
+
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
 		gbc.gridy = 1;
 		thePanel.add(object2, gbc);
-		
+
 		assertThat(elementInside(thePanel).at(3, 4), is(equalTo(object1)));
-		
+
 		assertThat(elementInside(thePanel).at(2, 1), is(equalTo(object2)));
 
 		assertThat(elementInside(thePanel).at(4, 4), is(not(equalTo(object1))));
@@ -76,7 +76,7 @@ public class SwingTest
 
 		assertThat(elementInside(thePanel).at(3, 4), is(not(equalTo(object2))));
 		assertThat(elementInside(thePanel).at(2, 1), is(not(equalTo(object1))));
-		
+
 		assertThat(elementInside(thePanel).at(0,0), is(not(equalTo(object1))));
 		assertThat(elementInside(thePanel).at(0,0), is(not(equalTo(object2))));
 		assertThat(elementInside(thePanel).at(0,0), is(nullValue()));
@@ -84,7 +84,7 @@ public class SwingTest
 		// no GridBag layout
 		assertThat(elementInside(new JPanel()).at(0, 0), is(nullValue()));
 	}
-	
+
 	@Test
 	public void checkHasLabel()
 	{
@@ -95,13 +95,13 @@ public class SwingTest
 		assertThat(new JLabel(LABEL_1), hasLabel(equalTo(LABEL_1)));
 		assertThat(label, hasLabel(equalTo(LABEL_1)));
 		assertThat(new JLabel(LABEL_1), hasLabel(not(equalTo(LABEL_2))));
-		
+
 		// null
 		assertThat(new JLabel(LABEL_NULL), hasLabel(equalTo(LABEL_NULL)));
-		
+
 		// default value
 		assertThat(new JLabel(), hasLabel(equalTo("")));
-		
+
 		// wrong types
 		assertThat(new JTextField(LABEL_1), hasLabel(not(equalTo(LABEL_1))));
 		assertThat(new JPanel(), hasLabel(not(equalTo(""))));
@@ -113,7 +113,7 @@ public class SwingTest
 		final String VALUE1 = "some value";
 		final String VALUE2 = "some other value";
 		final String NULL  = null;
-		
+
 		final JTextField textField = new JTextField();
 		textField.setText(VALUE1);
 
@@ -123,15 +123,15 @@ public class SwingTest
 		assertThat(textField, hasValue(equalTo(VALUE1)));
 		assertThat(new JLabel(VALUE1), hasValue(not(equalTo(VALUE2))));
 		assertThat(new JTextField(VALUE1), hasValue(not(equalTo(VALUE2))));
-		
+
 		// null
 		assertThat(new JLabel(NULL), hasValue(equalTo(NULL)));
 		assertThat(new JTextField(NULL), hasValue(equalTo(""))); // JTextField remaps null to ""!
-		
+
 		// default value
 		assertThat(new JLabel(), hasValue(equalTo("")));
 		assertThat(new JTextField(), hasValue(equalTo("")));
-		
+
 		// wrong types
 		assertThat(new JPanel(), hasValue(not(equalTo(""))));
 		assertThat(new JSlider(), hasValue(not(equalTo(""))));
@@ -145,7 +145,7 @@ public class SwingTest
 
 		panel.setBorder(null);
 		assertThat(panel, hasBorderTitle(equalTo(TITLE_NULL)));
-		
+
 		panel.setBorder(new EtchedBorder());
 		assertThat(panel, hasBorderTitle(not(equalTo(TITLE_NULL))));
 
@@ -156,11 +156,11 @@ public class SwingTest
 		panel.setBorder(new TitledBorder(TITLE_2));
 		assertThat(panel, hasBorderTitle(equalTo(TITLE_2)));
 		assertThat(panel, hasBorderTitle(not(equalTo(TITLE_1))));
-		
+
 		// wrong type
 		assertThat(new JLabel(), hasBorderTitle(not(equalTo(TITLE_NULL))));
 	}
-	
+
 	@Test
 	public void checkSameImageAs()
 	{
@@ -175,14 +175,14 @@ public class SwingTest
 		assertThat(ICON_1, is(not(sameImageAs(ICON_NULL))));
 
 		assertThat(ICON_NULL, is(not(sameImageAs(ICON_2))));
-		
+
 	}
-	
+
 	@Test
 	public void checkSameImageAsDescriptions()
 	{
 		Description description;
-		
+
 		description = new StringDescription();
 		sameImageAs(ICON_1).describeTo(description);
 		assertThat(
