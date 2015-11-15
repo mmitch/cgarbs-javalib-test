@@ -78,7 +78,7 @@ public abstract class Swing
 				{
 					return ((JLabel) actual).getText();
 				}
-				return "CLASS" + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
+				return "CLASS " + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
 			}
 		};
 	}
@@ -99,7 +99,7 @@ public abstract class Swing
 					}
 					return "BORDER CLASS " + border.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
 				}
-				return "CLASS" + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
+				return "CLASS " + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
 			}
 		};
 	}
@@ -115,11 +115,11 @@ public abstract class Swing
 				{
 					return ((JTextField) actual).getText();
 				}
-				if (actual instanceof JPanel)
+				if (actual instanceof JLabel)
 				{
 					return ((JLabel) actual).getText();
 				}
-				return "CLASS" + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
+				return "CLASS " + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
 			}
 		};
 	}
