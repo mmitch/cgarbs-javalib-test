@@ -135,7 +135,7 @@ public abstract class Swing
 			@Override
 			public void describeTo(Description description)
 			{
-				description.appendText("absolute path is ").appendValue(icon);
+				description.appendText("icon is ").appendValue(icon);
 			}
 
 			@Override
