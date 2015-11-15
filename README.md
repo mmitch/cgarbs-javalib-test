@@ -1,5 +1,5 @@
-cgarbs-javalib
-==============
+cgarbs-javalib-test
+===================
 [![Build Status](https://travis-ci.org/mmitch/cgarbs-javalib-test.svg?branch=master)](https://travis-ci.org/mmitch/cgarbs-javalib-test)
 [![Coverage Status](https://codecov.io/github/mmitch/cgarbs-javalib-test/coverage.svg?branch=master)](https://codecov.io/github/mmitch/cgarbs-javalib-test?branch=master)
 [![GPL 3+](https://img.shields.io/badge/license-GPL%203%2B-blue.svg)](http://www.gnu.org/licenses/gpl-3.0-standalone.html)
