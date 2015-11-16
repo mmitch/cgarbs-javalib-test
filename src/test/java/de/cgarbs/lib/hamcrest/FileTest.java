@@ -5,9 +5,9 @@
 package de.cgarbs.lib.hamcrest;
 
 import static de.cgarbs.lib.hamcrest.File.sameFileAs;
-import static de.cgarbs.lib.hamcrest.Swing.sameImageAs;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.hamcrest.text.IsEmptyString.isEmptyString;
 import static org.junit.Assert.assertThat;
@@ -127,6 +127,10 @@ public class FileTest
 				description.toString(),
 				endsWith(FILE_1.toString()+"\"")
 				);
+		assertThat(
+				description.toString(),
+				containsString("canonical")
+				);
 
 		description = new StringDescription();
 		sameFileAs(FILE_1).describeMismatch(FILE_2, description);
@@ -138,5 +142,79 @@ public class FileTest
 				description.toString(),
 				endsWith(FILE_2.toString()+"\"")
 				);
+		assertThat(
+				description.toString(),
+				containsString("canonical")
+				);
+	}
+
+	@Test
+	public void checkSameFileAsDescriptionsIOException()
+	{
+		final File FILE_1 = new File("\u0000"+sep+"\u0000");
+		final File FILE_2 = new File("some other file.txt");
+
+		Description description;
+
+		description = new StringDescription();
+		sameFileAs(FILE_1).describeTo(description);
+		assertThat(
+				description.toString(),
+				is(not(isEmptyString()))
+				);
+		assertThat(
+				description.toString(),
+				endsWith(FILE_1.toString()+"\"")
+				);
+		assertThat(
+				description.toString(),
+				containsString("absolute")
+				);
+
+		description = new StringDescription();
+		sameFileAs(FILE_2).describeMismatch(FILE_1, description);
+		assertThat(
+				description.toString(),
+				is(not(isEmptyString()))
+				);
+		assertThat(
+				description.toString(),
+				endsWith(FILE_1.toString()+"\"")
+				);
+		assertThat(
+				description.toString(),
+				containsString("absolute")
+				);
+
+		description = new StringDescription();
+		sameFileAs(FILE_1).describeMismatch(FILE_2, description);
+		assertThat(
+				description.toString(),
+				is(not(isEmptyString()))
+				);
+		assertThat(
+				description.toString(),
+				endsWith(FILE_2.toString()+"\"")
+				);
+		assertThat(
+				description.toString(),
+				containsString("canonical")
+				);
+	}
+
+	@Test
+	public void checkSameFileAsIOException()
+	{
+		final File FILE_1    = new File("\u0000"+sep+"\u0000");
+		final File FILE_2    = new File("some other file.txt");
+		final File FILE_NULL = null;
+
+		// IOException never matches
+		assertThat(FILE_1, is(not(sameFileAs(FILE_1))));
+		assertThat(FILE_2, is(not(sameFileAs(FILE_1))));
+		assertThat(FILE_1, is(not(sameFileAs(FILE_2))));
+
+		assertThat(FILE_1, is(not(sameFileAs(FILE_NULL))));
+		assertThat(FILE_NULL, is(not(sameFileAs(FILE_1))));
 	}
 }
