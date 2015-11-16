@@ -20,8 +20,11 @@ import org.hamcrest.Matcher;
 public abstract class File
 {
 	/**
-	 * Matches two instances of {@link java.io.File} by comparing their
-	 * absolute paths.  Null values are also considered equal.
+	 * Creates a matcher that matches if two instances of {@link java.io.File}
+	 * have the same canonical paths.  Null values are also considered equal.<br>
+	 * <b>Beware:</b> If there is an {@link IOException} calculating
+	 * the canonical path, the absolute path is used instead which might
+	 * result in unexpected mismatches.
 	 *
 	 * @param file the {@link java.io.File} to compare to
 	 * @return a new {@link BaseMatcher} matching as described
@@ -33,13 +36,27 @@ public abstract class File
 			@Override
 			public void describeTo(Description description)
 			{
-				description.appendText("absolute path is ").appendValue(getCanonicalPathSafe(file));
+				try
+				{
+					description.appendText("canonical path is ").appendValue(getCanonicalPathSafe(file));
+				}
+				catch (IOException e)
+				{
+					description.appendText("absolute(!) path is ").appendValue(file.getAbsolutePath());
+				}
 			}
 
 			@Override
 			public void describeMismatch(final Object item, Description mismatchDescription)
 			{
-				mismatchDescription.appendText(" was ").appendValue(getCanonicalPathSafe((java.io.File) item));
+				try
+				{
+					mismatchDescription.appendText(" was canonical ").appendValue(getCanonicalPathSafe((java.io.File) item));
+				}
+				catch (IOException e)
+				{
+					mismatchDescription.appendText(" was absolute(!) ").appendValue(((java.io.File) item).getAbsolutePath());
+				}
 			}
 
 			@Override
@@ -59,20 +76,13 @@ public abstract class File
 				}
 			}
 
-			private String getCanonicalPathSafe(java.io.File file)
+			private String getCanonicalPathSafe(java.io.File file) throws IOException
 			{
 				if (file == null)
 				{
 					return null;
 				}
-				try
-				{
-					return file.getCanonicalPath();
-				}
-				catch (IOException e)
-				{
-					return file.getAbsolutePath();
-				}
+				return file.getCanonicalPath();
 			}
 		};
 	}
