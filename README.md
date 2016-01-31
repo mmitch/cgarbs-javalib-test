@@ -9,13 +9,15 @@ cgarbs-javalib-test
 about
 -----
 
-my own Java framework, test stuff (Hamcrest Matchers etc.)
+My own Java framework, test stuff (Hamcrest Matchers etc.).
+
+The project homepage is at <https://github.com/mmitch/cgarbs-javalib-test>
 
 In order to separate runtime and compile/test dependencies to my Java
 framework, this package has been split from the other parts of my
 [cgarbs-javalib][1] framework.
 
-[1]: https://github.com/mmitch/cgarbs-javalib
+[1]: <https://github.com/mmitch/cgarbs-javalib>
 
 
 dependencies
@@ -37,11 +39,11 @@ Building via ``build.gradle`` should be straightforward.
 
 There are some additional build targets available:
 
-* ``fixit`` runs a bash script to fix line breaks and indentation on
-  empty lines.
-
 * ``version`` shows the current version number that would be used when
   invoking the ``publish`` target
+
+* ``fixit`` runs a bash script to fix line breaks and indentation on
+  empty lines.
 
 
 copyright
