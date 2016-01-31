@@ -13,9 +13,9 @@ my own Java framework, test stuff (Hamcrest Matchers etc.)
 
 In order to separate runtime and compile/test dependencies to my Java
 framework, this package has been split from the other parts of my
-[cgarbs-javalib][] framework.
+[cgarbs-javalib][1] framework.
 
-[cgarbs-javalib]: https://github.com/mmitch/cgarbs-javalib
+[1]: https://github.com/mmitch/cgarbs-javalib
 
 
 dependencies
