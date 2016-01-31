@@ -43,12 +43,12 @@ To use cgarbs-javalib-test in your own Gradle project, use this:
     	}
     }
     dependencies {
-	testCompile 'de.cgarbs:cgarbs-javalib-test:0.1.0'
+    	testCompile 'de.cgarbs:cgarbs-javalib-test:0.1.0'
     }
 
 Adjust the version number accordingly, this is just an example.  Maven
-users should also be able to use this repository (but I don't know the
-maven syntax for that).
+users should also be able to use this repository, but I don't know the
+maven syntax for that.
 
 
 building with Gradle
